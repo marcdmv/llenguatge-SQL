@@ -127,3 +127,99 @@ WHERE nombre LIKE '%Monitor%' AND precio < 215;
 SELECT nombre,precio FROM tienda.producto
 WHERE precio >= 180
 ORDER BY precio DESC, nombre ASC;
+
+
+1.1.4
+
+1.
+SELECT producto.nombre nombre_producto,precio,fabricante.nombre nombre_fabricante FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante;
+
+2.
+SELECT producto.nombre nombre_producto,precio,fabricante.nombre nombre_fabricante FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+ORDER BY nombre_fabricante ASC;
+
+3.
+SELECT
+producto.codigo codigo_producto,
+producto.nombre nombre_producto,
+fabricante.codigo codigo_fabricante,
+fabricante.nombre nombre_fabricante
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante;
+
+4.
+SELECT
+producto.nombre nombre_producto,
+producto.precio precio_producto,
+fabricante.nombre nombre_fabricante
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+ORDER BY precio_producto ASC
+LIMIT 1;
+
+5.
+SELECT
+producto.nombre nombre_producto,
+producto.precio precio_producto,
+fabricante.nombre nombre_fabricante
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+ORDER BY precio_producto DESC
+LIMIT 1;
+
+6.
+SELECT
+producto.nombre nombre_producto
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE fabricante.nombre = 'Lenovo';
+
+7.
+SELECT
+producto.nombre nombre_producto
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE fabricante.nombre = 'Crucial' AND producto.precio > 200;
+
+8.
+SELECT
+producto.nombre nombre_producto
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE fabricante.nombre = 'Crucial' OR fabricante.nombre = 'Hewlett-Packard' OR fabricante.nombre = 'Seagate';
+
+9.
+SELECT
+producto.nombre nombre_producto
+FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE fabricante.nombre IN('Crucial','Hewlett-Packard','Seagate');
+
+10.
+SELECT producto.nombre nombre_producto,precio FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE RIGHT(fabricante.nombre,1) = 'e';
+
+11.
+SELECT producto.nombre nombre_producto,precio FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE fabricante.nombre LIKE '%w%';
+
+12.
+SELECT producto.nombre nombre_producto,
+precio,
+fabricante.nombre nombre_fabricante
+ FROM tienda.producto producto
+LEFT JOIN tienda.fabricante fabricante ON fabricante.codigo = producto.codigo_fabricante
+WHERE precio >= 180
+ORDER BY precio DESC, nombre_producto ASC;
+
+13.
+SELECT 
+distinct fabricante.codigo codigo,
+fabricante.nombre nombre_fabricante
+FROM tienda.fabricante fabricante
+JOIN
+tienda.producto producto ON producto.codigo_fabricante = fabricante.codigo;
